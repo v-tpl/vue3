@@ -15,12 +15,27 @@ export default defineConfig({
     UnoCSS(),
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/core'],
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass'
+        })
+      ]
     }),
     Components({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass'
+        })
+      ]
     })
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/element/index.scss" as *;`
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
